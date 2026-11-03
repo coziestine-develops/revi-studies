@@ -1,0 +1,57 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{ts,tsx}'],
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'background': 'rgb(var(--background) / <alpha-value>)',
+        'surface': 'rgb(var(--surface) / <alpha-value>)',
+        'surface-muted': 'rgb(var(--surface-muted) / <alpha-value>)',
+        'surface-raised': 'rgb(var(--surface-raised) / <alpha-value>)',
+        'foreground': 'rgb(var(--foreground) / <alpha-value>)',
+        'muted': 'rgb(var(--foreground-muted) / <alpha-value>)',
+        'border': 'rgb(var(--border) / <alpha-value>)',
+        'feature-a': 'rgb(var(--feature-card-a) / <alpha-value>)',
+        'feature-b': 'rgb(var(--feature-card-b) / <alpha-value>)',
+        'mint': 'rgb(var(--accent-mint) / <alpha-value>)',
+        'mint-surface': 'rgb(var(--accent-mint-surface) / <alpha-value>)',
+        'lavender': 'rgb(var(--accent-lavender) / <alpha-value>)',
+        'lavender-surface': 'rgb(var(--accent-lavender-surface) / <alpha-value>)',
+        'primary': 'rgb(var(--primary) / <alpha-value>)',
+        'primary-foreground': 'rgb(var(--primary-foreground) / <alpha-value>)',
+        'brand': 'rgb(var(--brand) / <alpha-value>)',
+        'accent-orange': 'rgb(var(--accent-orange) / <alpha-value>)',
+        'overlay': 'rgb(var(--overlay) / <alpha-value>)',
+        'on-accent': 'rgb(var(--on-accent) / <alpha-value>)',
+        'success': 'rgb(var(--success) / <alpha-value>)',
+        'warning': 'rgb(var(--warning) / <alpha-value>)',
+        'error': 'rgb(var(--error) / <alpha-value>)',
+        'info': 'rgb(var(--info) / <alpha-value>)',
+        'sidebar': 'rgb(var(--sidebar) / <alpha-value>)',
+        'sidebar-foreground': 'rgb(var(--sidebar-foreground) / <alpha-value>)',
+        'sidebar-muted': 'rgb(var(--sidebar-muted) / <alpha-value>)',
+        'sidebar-hover': 'rgb(var(--sidebar-hover) / <alpha-value>)',
+        'sidebar-border': 'rgb(var(--sidebar-border) / <alpha-value>)',
+        'secondary': 'rgb(var(--secondary) / <alpha-value>)',
+      },
+      borderRadius: {
+        card: '16px',
+        control: '10px',
+      },
+      boxShadow: {
+        // Soft, charcoal-plum-tinted shadows so cards lift gently on the light canvas.
+        sm: '0 1px 2px 0 rgb(41 39 53 / 0.05)',
+        DEFAULT: '0 1px 3px 0 rgb(41 39 53 / 0.08), 0 1px 2px -1px rgb(41 39 53 / 0.06)',
+        lg: '0 10px 24px -6px rgb(41 39 53 / 0.12)',
+        xl: '0 18px 40px -12px rgb(41 39 53 / 0.18)',
+      },
+      fontFamily: {
+        sans: ['Nunito', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        landing: ['"Bricolage Grotesque"', 'Nunito', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Nunito', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+      },
+    },
+  },
+  plugins: [],
+};

@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#FFF9EE" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#201F29" media="(prefers-color-scheme: dark)" />
+    <script>
+      /* Apply the saved theme before first paint so there is no flash of the wrong theme.
+         The landing and login pages always render in dark mode. */
+      (function () {
+        try {
+          var t = localStorage.getItem('revi-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          var p = location.pathname;
+          if (p === '/' || p === '/login') t = 'dark';
+          var r = document.documentElement;
+          r.classList.toggle('dark', t === 'dark');
+          r.dataset.theme = t;
+          r.style.colorScheme = t;
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="/revi-favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <meta name="description" content="REVI helps students organize reviewers, generate study tools with AI, practice with flashcards and quizzes, and track progress." />
+    <title>REVI | Study Smarter. Remember More.</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

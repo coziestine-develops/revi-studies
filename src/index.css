@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* REVI design tokens: Charcoal & Butter Yellow, taken from the mascot.
+   Colors are RGB channels so opacity modifiers work (rgb(var(--token) / 0.5)).
+   Use semantic names in components. Never hardcode hex values or pure white/black. */
+:root {
+  /* Raw brand palette (mapped to semantic tokens below).
+     The --revi-navy / --revi-midnight / --revi-soft-navy names are kept so existing
+     references keep working, but their values are now charcoal plum, not blue. */
+  --revi-navy: 41 39 53;             /* #292735 Charcoal Plum */
+  --revi-midnight: 32 31 41;         /* #201F29 deepest charcoal plum */
+  --revi-soft-navy: 57 54 68;        /* #393644 */
+  --revi-lavender: 165 160 232;      /* #A5A0E8 Soft Lavender */
+  --revi-soft-lavender: 185 178 215; /* #B9B2D7 */
+  --revi-cream: 255 249 238;         /* #FFF9EE Warm Cream */
+  --revi-gold: 255 216 77;           /* #FFD84D Butter Yellow */
+  --revi-pencil-gold: 245 166 35;    /* #F5A623 Pencil Gold */
+  --revi-orange: 245 166 35;         /* #F5A623 Pencil Gold (beak and feet) */
+  --revi-orange-soft: 247 190 85;    /* #F7BE55 */
+  --revi-blush: 246 183 183;         /* #F6B7B7 */
+  --revi-graphite: 101 97 114;       /* #656172 Muted Text */
+
+  /* Legacy feature-card tokens (kept so nothing referencing them breaks). */
+  --feature-card-a: 234 231 250;     /* #EAE7FA Lavender Mist */
+  --feature-card-b: 244 233 173;     /* #F4E9AD */
+
+  /* Light: warm cream canvas, white cards, charcoal ink, butter-yellow accents. */
+  --background: 255 249 238;         /* #FFF9EE */
+  --surface: 255 255 255;            /* #FFFFFF */
+  --surface-muted: 245 241 233;      /* #F5F1E9 */
+  --surface-raised: 255 255 255;     /* menus and dialogs */
+  --foreground: 41 39 53;            /* #292735 */
+  --foreground-muted: 101 97 114;    /* #656172 */
+  --border: 229 223 213;             /* #E5DFD5 Warm Border */
+  --secondary: 119 113 140;          /* #77718C */
+  --accent-mint: var(--revi-gold);   /* #FFD84D main accent */
+  --accent-mint-surface: 244 233 173; /* #F4E9AD soft accent */
+  --accent-lavender: var(--revi-lavender);
+  --accent-lavender-surface: 234 231 250; /* #EAE7FA Lavender Mist */
+  --accent-orange: var(--revi-pencil-gold);
+  --primary: var(--revi-navy);       /* #292735 */
+  --primary-foreground: 255 249 238; /* warm cream, never pure white */
+  --brand: 98 92 134;                /* #625C86 secondary accent, darkened for AA text on cream (links, focus rings) */
+  --on-accent: var(--revi-navy);     /* charcoal text on butter yellow */
+  --success: 21 128 61;              /* #15803D green */
+  --warning: 160 100 10;             /* pencil gold, darkened for text */
+  --error: 220 38 38;                /* #DC2626 red */
+  --info: 98 92 134;                 /* lavender family, no blue */
+  /* Navigation stays charcoal in both themes. */
+  --sidebar: 41 39 53;               /* #292735 */
+  --sidebar-foreground: 248 245 236;
+  --sidebar-muted: 197 192 208;
+  --sidebar-hover: 57 54 68;
+  --sidebar-border: 64 61 75;
+  --overlay: 32 31 41;               /* modal backdrop tint */
+  color-scheme: light;
+}
+
+.dark {
+  /* Dark: cozy charcoal plum, warm off-white text, never pure black or white. */
+  --feature-card-a: 57 54 68;
+  --feature-card-b: 75 69 50;
+
+  --background: 32 31 41;            /* #201F29 */
+  --surface: 43 41 55;               /* #2B2937 */
+  --surface-muted: 50 47 62;         /* between surface and elevated */
+  --surface-raised: 57 54 68;        /* #393644 */
+  --foreground: 248 245 236;         /* #F8F5EC */
+  --foreground-muted: 197 192 208;   /* #C5C0D0 */
+  --border: 64 61 75;                /* #403D4B */
+  --secondary: 185 178 215;          /* #B9B2D7 */
+  --accent-mint: var(--revi-gold);   /* #FFD84D */
+  --accent-mint-surface: 75 69 50;   /* #4B4532 */
+  --accent-lavender: var(--revi-soft-lavender);
+  --accent-lavender-surface: 57 54 68;
+  --accent-orange: var(--revi-pencil-gold);
+  --primary: var(--revi-gold);       /* #FFD84D */
+  --primary-foreground: 41 39 53;    /* charcoal on butter yellow */
+  --brand: var(--revi-gold);         /* focus rings and links */
+  --on-accent: var(--revi-navy);
+  --success: 74 222 128;             /* #4ADE80 green */
+  --warning: 245 166 35;
+  --error: 248 113 113;              /* #F87171 red */
+  --info: 185 178 215;
+  --sidebar: 43 41 55;
+  --sidebar-foreground: 248 245 236;
+  --sidebar-muted: 197 192 208;
+  --sidebar-hover: 57 54 68;
+  --sidebar-border: 64 61 75;
+  --overlay: 16 15 22;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+  html, body, #root { min-height: 100%; }
+  h1, h2, h3 { @apply font-display; }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  #root { overflow-x: clip; }
+  h1, h2, h3, h4, p, li, td, th, dt, dd, label, a, span { overflow-wrap: break-word; }
+  /* Long emails, file names, and URLs wrap inside cards on phones instead of pushing the page sideways. */
+  p, li, dd, dt, td, a, span { overflow-wrap: anywhere; }
+  img, svg, video, canvas { max-width: 100%; }
+  textarea { resize: vertical; }
+  :focus-visible {
+    outline: 2px solid rgb(var(--brand));
+    outline-offset: 2px;
+  }
+
+  /* iOS Safari zooms the page when a focused field is under 16px. Keep fields at 16px on
+     phones and give touch devices comfortably tall targets for fields. */
+  @media (max-width: 767px) {
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']),
+    select,
+    textarea {
+      font-size: 16px;
+    }
+  }
+  @media (pointer: coarse) {
+    select,
+    input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']) {
+      min-height: 44px;
+    }
+  }
+
+  /* One password eye only: hide the built-in reveal and autofill buttons in Edge, Chrome and Safari. */
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
+  input[type='password']::-webkit-credentials-auto-fill-button,
+  input::-webkit-contacts-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+  }
+
+  /* No blinking text caret or I-beam when clicking around the interface. Fields keep both. */
+  body {
+    cursor: default;
+    caret-color: transparent;
+  }
+  input, textarea, [contenteditable='true'] {
+    caret-color: rgb(var(--brand));
+  }
+  input:not([type='checkbox']):not([type='radio']):not([type='range']):not([type='file']):not([type='button']):not([type='submit']),
+  textarea {
+    cursor: text;
+  }
+  button, [role='button'], [role='tab'], summary, select, label[for], a[href] {
+    cursor: pointer;
+  }
+  button:disabled { cursor: not-allowed; }
+  button, nav, aside, header, label, h1, h2, h3, h4, [role='tab'], [role='menuitem'] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  input, textarea { -webkit-user-select: text; user-select: text; }
+
+  /* No tap-highlight flash on phones and tablets. */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button, a, [role='button'], input, select, textarea, label {
+    touch-action: manipulation;
+  }
+
+  /* Hide every scrollbar. Scrolling still works with touch, trackpad, and wheel. */
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Word documents shown in the file viewer. The HTML comes from mammoth and is sanitized first. */
+.file-doc h1 { font-size: 1.5rem; font-weight: 700; margin: 1.25rem 0 0.5rem; line-height: 1.25; }
+.file-doc h2 { font-size: 1.25rem; font-weight: 700; margin: 1.1rem 0 0.4rem; line-height: 1.3; }
+.file-doc h3 { font-size: 1.1rem; font-weight: 600; margin: 1rem 0 0.4rem; }
+.file-doc h4, .file-doc h5, .file-doc h6 { font-size: 1rem; font-weight: 600; margin: 0.9rem 0 0.3rem; }
+.file-doc p { margin: 0.5rem 0; }
+.file-doc ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
+.file-doc ol { list-style: decimal; padding-left: 1.5rem; margin: 0.5rem 0; }
+.file-doc li { margin: 0.2rem 0; }
+.file-doc a { color: rgb(var(--brand)); text-decoration: underline; text-underline-offset: 3px; }
+.file-doc img { max-width: 100%; height: auto; border-radius: 10px; margin: 0.75rem 0; }
+.file-doc blockquote { border-left: 3px solid rgb(var(--border)); padding-left: 0.75rem; color: rgb(var(--foreground-muted)); }
+.file-doc table { display: block; width: 100%; overflow-x: auto; border-collapse: collapse; font-size: 0.8rem; margin: 0.75rem 0; }
+.file-doc td, .file-doc th { border: 1px solid rgb(var(--border)); padding: 0.35rem 0.5rem; vertical-align: top; }
+
+/* Loading animation for RevLoader (phones and tablets). Motion is removed globally
+   for reduced-motion users by the rule above. */
+.revi-loader-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 14px;
+}
+.revi-loader-avatar {
+  animation: revi-loader-float 1.6s ease-in-out infinite;
+  box-shadow: 0 0 0 6px rgb(var(--accent-mint-surface) / 0.6), 0 10px 24px -6px rgb(41 39 53 / 0.2);
+}
+.revi-loader-shadow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 56px;
+  height: 8px;
+  border-radius: 9999px;
+  background: rgb(41 39 53 / 0.22);
+  transform: translateX(-50%);
+  animation: revi-loader-shadow 1.6s ease-in-out infinite;
+}
+.revi-loader-dots span {
+  display: inline-block;
+  animation: revi-loader-dot 1.2s ease-in-out infinite;
+}
+.revi-loader-dots span:nth-child(2) { animation-delay: 0.15s; }
+.revi-loader-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes revi-loader-float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+@keyframes revi-loader-shadow {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+  50% { transform: translateX(-50%) scale(0.6); opacity: 0.45; }
+}
+@keyframes revi-loader-dot {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
